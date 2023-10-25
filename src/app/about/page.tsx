@@ -15,9 +15,13 @@ const Page: FC = () => {
     <main className="w-full text-lg text-paragraph flex flex-col gap-9">
       <AboutTitle />
       <Reveal delay={0.4}>
-        <div className="flex gap-8 items-center">
+        <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 rounded-full p-0.5 ">
-            <Image src={me} alt="Jump Scare" className="w-96 rounded-full" />
+            <Image
+              src={me}
+              alt="Jump Scare"
+              className=" w-44 md:w-96 rounded-full"
+            />
           </div>
           <p className=" leading-9">
             So you probably know by now, but for those who don&apos;t my name is

@@ -25,7 +25,7 @@ const Navbar: FC = () => {
   return (
     <nav className="w-full  my-10 flex justify-between items-center">
       <Link href="/">
-        <Image className="w-12" src={logo} alt="logo" />
+        <Image className="w-14 rounded-lg" src={logo} alt="logo" />
       </Link>
       <div className="space-x-6">
         {links.map((link) => {

@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-main-background max-w-3xl px-5 md:px-0 m-auto font-rubik text-white scrollbar-thumb-cyan-700 scrollbar-thin">
+      <body className="bg-main-background max-w-3xl px-8 md:px-0 m-auto font-montserrat text-white scrollbar-thumb-cyan-700 scrollbar-thin">
         <Navbar />
         {children}
         <footer className="mt-16 mb-28 flex justify-between items-center">

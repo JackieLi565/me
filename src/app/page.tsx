@@ -10,6 +10,7 @@ import { Blog } from "@/types/types";
 import { WithId } from "mongodb";
 import { GithubOutlined, HighlightOutlined } from "@ant-design/icons";
 import TextLogo from "@/components/TextLogo";
+import Error from "@/components/Error";
 
 const getTopBlogs = async () => {
   const client = new Database();
@@ -35,6 +36,7 @@ const getTopBlogs = async () => {
     await client.disconnect();
   }
 };
+
 const Page = async () => {
   const topBlogs = await getTopBlogs();
   return (
@@ -69,25 +71,27 @@ const Page = async () => {
               run without learning how to walk
             </span>
             . But I also believe having hands-on experience is equally as
-            valuable. Building projects even if it&apos;s as simple as a{" "}
-            <span className="text-cyan-600 font-semibold">todo list</span> is my
-            bread and butter, you can check out some of my favourites below.
+            valuable. Building projects even if it&apos;s as simple as a todo
+            list is my bread and butter, you can check out some of my favourites
+            below.
           </p>
         </section>
       </Reveal>
       <Reveal>
-        <section className="flex gap-4">
+        <section className="flex flex-col md:flex-row gap-4">
           <Linkout
             newTab={true}
-            icon={<GithubOutlined className="text-[42px] flex text-cyan-600" />}
-            title="My Github 👌"
+            icon={
+              <GithubOutlined className="text-[42px] flex text-slate-400" />
+            }
+            title="Sources"
             description="7 Cool People"
             href="https://github.com/JackieLi565"
           />
           <Linkout
             newTab={false}
             icon={
-              <HighlightOutlined className="text-[42px] flex text-cyan-600" />
+              <HighlightOutlined className="text-[42px] flex text-slate-400" />
             }
             title="Projects Section"
             description="My Top Picks"
@@ -97,7 +101,7 @@ const Page = async () => {
       </Reveal>
       <Reveal delay={0.7}>
         <section className="space-y-4">
-          <h1 className="text-2xl font-semibold">Jackie Writes Blogs???</h1>
+          <h1 className="text-2xl font-semibold">Jackie Writes Blogs ???</h1>
           <p className="text-lg text-paragraph leading-9">
             While English wasn&apos;t my first language, I believe practice is
             crucial. Blogs are beneficial for both readers and writers.
@@ -111,18 +115,24 @@ const Page = async () => {
             below.
           </p>
 
-          {topBlogs &&
-            topBlogs.map((blog) => (
-              <BlogCard
-                key={blog._id.toString()}
-                title={blog.title}
-                date={blog.publish}
-                views={blog.views}
-                readTime={blog.ttr}
-                id={blog._id.toString()}
-                tags={blog.tags}
-              />
-            ))}
+          {topBlogs && topBlogs.length > 0 ? (
+            topBlogs.map((blog) => {
+              const key = blog._id.toString();
+              return (
+                <BlogCard
+                  key={key}
+                  title={blog.title}
+                  views={blog.views}
+                  date={blog.publish}
+                  tags={blog.tags}
+                  readTime={blog.ttr}
+                  id={key}
+                />
+              );
+            })
+          ) : (
+            <Error />
+          )}
         </section>
       </Reveal>
     </main>

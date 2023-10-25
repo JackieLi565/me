@@ -3,6 +3,7 @@ import { BlogsTitle } from "@/components/Titles";
 import Database from "@/lib/db";
 import { Blog } from "@/types/types";
 import { FC } from "react";
+import Error from "@/components/Error";
 
 const getBlogMetaData = async () => {
   const client = new Database();
@@ -22,12 +23,14 @@ const getBlogMetaData = async () => {
 const Page: FC = async () => {
   const blogs = await getBlogMetaData();
   return (
-    <main className="w-full flex flex-col gap-9">
+    <main className="w-full flex flex-col gap-9 text-lg text-paragraph">
+      <BlogsTitle />
       <section>
-        <BlogsTitle />
+        This is where I like to share what intrests me. Still new to it, I'm
+        always open for feedback.
       </section>
       <section className="space-y-3">
-        {blogs &&
+        {blogs && blogs.length > 0 ? (
           blogs.map((blog) => {
             const key = blog._id.toString();
             return (
@@ -41,7 +44,10 @@ const Page: FC = async () => {
                 id={key}
               />
             );
-          })}
+          })
+        ) : (
+          <Error />
+        )}
       </section>
     </main>
   );

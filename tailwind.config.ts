@@ -16,6 +16,7 @@ const config: Config = {
         rubik: ["Rubik", "sans-serif"],
         code: ["M PLUS Code Latin", "monospace"],
         poly: ["Playpen Sans", "cursive"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },

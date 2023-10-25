@@ -13,38 +13,43 @@ import { FC } from "react";
 const Masonry = () => {
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="flex flex-col gap-4">
-          {/** Col 1 */}
+      <div className="flex flex-wrap justify-center">
+        <div className="w-1/2 md:w-1/3 p-1">
           <ImageCard
             image={nanaimo}
             title="Nanaimo Station"
             description="Vancouver, British Columbia"
           />
-          <ImageCard image={cne} title="CNE" description="Toronto, Ontario" />
         </div>
-        <div className="flex flex-col gap-4">
-          {/** Col 2 */}
+        <div className="w-1/2 lg:w-1/3 p-1">
+          <ImageCard
+            image={cne}
+            title="Canadian National Exhibition"
+            description="Toronto, Ontario"
+          />
+        </div>
+        <div className=" w-1/2 lg:w-1/3 p-1">
           <ImageCard
             image={query}
             title="Cove Forest"
             description="Vancouver, British Columbia"
           />
-
+        </div>
+        <div className="w-1/2 md:w-1/3 p-1">
           <ImageCard
             image={squamish}
             title="Mt Habrich"
             description="Squamish, British Columbia"
           />
         </div>
-        <div className="flex flex-row md:flex-col gap-4">
-          {/** Col 3 */}
+        <div className="w-1/2 md:w-1/3 p-1">
           <ImageCard
             image={bike}
             title="Humber Bay"
             description="Toronto, Ontario"
           />
-
+        </div>
+        <div className="w-1/2 md:w-1/3 p-1">
           <ImageCard
             image={riverdale}
             title="Riverdale"
