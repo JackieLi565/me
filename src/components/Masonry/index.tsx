@@ -49,11 +49,12 @@ const Masonry = () => {
     <div>
       <div className="flex flex-wrap justify-center">
         {images.map((image) => (
-          <div className="w-1/2 md:w-1/3 p-1">
+          <div key={image.title} className="w-1/2 md:w-1/3 p-1">
             <ImageCard
               image={image.image}
               title={image.title}
               description={image.location}
+              alt={image.title}
             />
           </div>
         ))}
@@ -71,8 +72,9 @@ type ImageCardProps = {
   image: StaticImageData;
   title: string;
   description: string;
+  alt: string;
 };
-const ImageCard: FC<ImageCardProps> = ({ image, title, description }) => {
+const ImageCard: FC<ImageCardProps> = ({ image, title, description, alt }) => {
   const finishLoad = (image: HTMLImageElement) => {
     image.classList.remove("opacity-0");
   };
@@ -86,7 +88,7 @@ const ImageCard: FC<ImageCardProps> = ({ image, title, description }) => {
         className="rounded-lg opacity-0 transition-opacity duration-300"
         onLoadingComplete={finishLoad}
         src={image}
-        alt=""
+        alt={alt}
       />
     </div>
   );

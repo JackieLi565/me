@@ -26,8 +26,8 @@ const Page: FC = async () => {
     <main className="w-full flex flex-col gap-9 text-lg text-paragraph">
       <BlogsTitle />
       <section>
-        This is where I like to share what intrests me. Still new to it, I'm
-        always open for feedback.
+        This is where I like to share what intrests me. Still new to it,
+        I&apos;m always open for feedback.
       </section>
       <section className="space-y-3">
         {blogs && blogs.length > 0 ? (
