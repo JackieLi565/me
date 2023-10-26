@@ -57,11 +57,14 @@ const getBlogContent = (blog: string) => {
 };
 
 type PageProps = { params: { slug: string } };
+
 const Page: FC<PageProps> = async ({ params }) => {
   const doc = await incViewCount(params.slug);
 
   if (!doc) notFound();
+
   const content = getBlogContent(doc.title);
+
   return (
     <main>
       <article className="prose prose-lg prose-headings:text-white prose-p:text-paragraph prose-strong:text-cyan-700 prose-a:text-cyan-600 prose-li:text-paragraph prose-table:text-paragraph prose-img:rounded-lg">

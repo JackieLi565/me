@@ -11,51 +11,52 @@ import bike2 from "../../../public/gallery/bike.jpg";
 import Image, { StaticImageData } from "next/image";
 import { FC } from "react";
 const Masonry = () => {
+  const images = [
+    {
+      image: bike,
+      title: "Humber Bay",
+      location: "Toronto, Ontario",
+    },
+
+    {
+      image: cne,
+      title: "Canadian National Exhibition",
+      location: "Toronto, Ontario",
+    },
+    {
+      image: query,
+      title: "Cove Forest",
+      location: "Vancouver, British Columbia",
+    },
+    {
+      image: squamish,
+      title: "Mt Habrich",
+      location: "Squamish, British Columbia",
+    },
+    {
+      image: nanaimo,
+      title: "Nanaimo Station",
+      location: "Vancouver, British Columbia",
+    },
+    {
+      image: riverdale,
+      title: "Riverdale",
+      location: "Toronto, Ontario",
+    },
+  ];
+
   return (
     <div>
       <div className="flex flex-wrap justify-center">
-        <div className="w-1/2 md:w-1/3 p-1">
-          <ImageCard
-            image={nanaimo}
-            title="Nanaimo Station"
-            description="Vancouver, British Columbia"
-          />
-        </div>
-        <div className="w-1/2 lg:w-1/3 p-1">
-          <ImageCard
-            image={cne}
-            title="Canadian National Exhibition"
-            description="Toronto, Ontario"
-          />
-        </div>
-        <div className=" w-1/2 lg:w-1/3 p-1">
-          <ImageCard
-            image={query}
-            title="Cove Forest"
-            description="Vancouver, British Columbia"
-          />
-        </div>
-        <div className="w-1/2 md:w-1/3 p-1">
-          <ImageCard
-            image={squamish}
-            title="Mt Habrich"
-            description="Squamish, British Columbia"
-          />
-        </div>
-        <div className="w-1/2 md:w-1/3 p-1">
-          <ImageCard
-            image={bike}
-            title="Humber Bay"
-            description="Toronto, Ontario"
-          />
-        </div>
-        <div className="w-1/2 md:w-1/3 p-1">
-          <ImageCard
-            image={riverdale}
-            title="Riverdale"
-            description="Toronto, Ontario"
-          />
-        </div>
+        {images.map((image) => (
+          <div className="w-1/2 md:w-1/3 p-1">
+            <ImageCard
+              image={image.image}
+              title={image.title}
+              description={image.location}
+            />
+          </div>
+        ))}
       </div>
       <p className="text-right italic text-paragraph text-opacity-50">
         not really good at taking pictures

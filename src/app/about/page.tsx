@@ -35,16 +35,20 @@ const Page: FC = () => {
       <Reveal>
         <p className="leading-9">
           It all started during my second year at{" "}
-          <TextLogo logo={tmu} size="w-10">
+          <TextLogo href="https://www.torontomu.ca/" logo={tmu} size="w-10">
             Toronto Metropolitain University
           </TextLogo>{" "}
           where I took an introduction to{" "}
-          <TextLogo logo={java} size="w-3.5">
+          <TextLogo
+            href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition"
+            logo={java}
+            size="w-3.5"
+          >
             Java
           </TextLogo>{" "}
           course. At first, like many, I didn&apos;t enjoy it, but during this
           time I also joined my school&apos;s robotics team{" "}
-          <TextLogo logo={tmr} size="rounded">
+          <TextLogo href="https://teamtmr.ca/" logo={tmr} size="rounded">
             Toronto Met Robotics
           </TextLogo>
           . Joining the team gave me a lot of insight into how I could apply
@@ -54,14 +58,18 @@ const Page: FC = () => {
           </span>
           , and not just simple Java games. At the time I was tasked with fixing
           some code in an existing{" "}
-          <TextLogo logo={react} size="w-3.5">
+          <TextLogo href="https://react.dev/" logo={react} size="w-3.5">
             React.js
           </TextLogo>{" "}
           project. I&apos;m not going to lie it was really hard at first,
           jumping from Java to JSX syntax, but I truly believe this step was
           where I experienced something refreshing in programming. Fast forward
           a little I started from square one with{" "}
-          <TextLogo logo={js} size="w-3.5">
+          <TextLogo
+            href="https://www.youtube.com/watch?v=iiHpi0ZkX_I&ab_channel=ThePrimeTime"
+            logo={js}
+            size="w-3.5"
+          >
             Javascript
           </TextLogo>{" "}
           where I taught myself the basics via online tutorials, and now I am

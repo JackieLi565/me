@@ -48,12 +48,16 @@ const Page = async () => {
           software engineering 👩🏻‍💻
         </span>{" "}
         at{" "}
-        <TextLogo logo={tmu} size="w-10">
+        <TextLogo href="https://www.torontomu.ca/" logo={tmu} size="w-10">
           Toronto Metropolitain University
         </TextLogo>
         . I currently work for my school&apos;s recreational department as a
         lead developer for the internal managment software built using{" "}
-        <TextLogo logo={next} size="w-4 bg-white rounded-full">
+        <TextLogo
+          href="https://nextjs.org/"
+          logo={next}
+          size="w-4 bg-white rounded-full"
+        >
           Next.js
         </TextLogo>
       </p>
@@ -131,7 +135,7 @@ const Page = async () => {
               );
             })
           ) : (
-            <Error />
+            <Error message="Where Did My Blogs Go?" />
           )}
         </section>
       </Reveal>

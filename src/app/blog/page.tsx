@@ -46,7 +46,7 @@ const Page: FC = async () => {
             );
           })
         ) : (
-          <Error />
+          <Error message="Where Did My Blogs Go?" />
         )}
       </section>
     </main>

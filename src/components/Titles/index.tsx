@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { FC } from "react";
 import { TypeAnimation } from "react-type-animation";
 
@@ -44,6 +45,17 @@ export const AboutTitle = () => {
 
 export const BlogsTitle = () => {
   const seq = ["i like to write about intresting tech!"];
+  return (
+    <TypeAnimation
+      className="text-3xl font-semibold text-white"
+      sequence={seq}
+    />
+  );
+};
+
+export const ErrorTitle = () => {
+  const path = usePathname();
+  const seq = [`${path} doesn't seem to exist`];
   return (
     <TypeAnimation
       className="text-3xl font-semibold text-white"
