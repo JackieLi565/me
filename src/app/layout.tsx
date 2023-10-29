@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Jackie Li",
-  description: "first in first out",
+  description: "First In First Out",
   icons: [{ rel: "icon", url: logo.src }],
 };
 

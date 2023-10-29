@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "100%",
+          },
+        },
+      },
       colors: {
         "main-background": "#0c0f11",
         paragraph: "#adb4bb",

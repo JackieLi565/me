@@ -26,8 +26,8 @@ export const BlogCard: FC<BlogCardProps> = ({
       className="flex p-4 group justify-between items-center bg-neutral-800 border border-neutral-600 rounded-md"
     >
       <div className="space-y-2">
-        <h1 className="text-xl">{title}</h1>
-        <p className="text-paragraph italic">
+        <h1 className="text-xl text-cyan-600">{title}</h1>
+        <p className="text-paragraph italic text-base">
           {date.toLocaleString("default", {
             day: "numeric",
             month: "long",

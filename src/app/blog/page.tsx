@@ -10,6 +10,14 @@ const getBlogMetaData = async () => {
   try {
     const db = await client.connect();
 
+    // const blog: Blog = {
+    //   title: "First Blog",
+    //   views: 10,
+    //   publish: new Date(),
+    //   ttr: 10,
+    //   tags: ["First", "New Blogger"],
+    // };
+
     const data = await db.collection<Blog>("blogs").find({}).toArray();
 
     return data;
