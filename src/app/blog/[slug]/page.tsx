@@ -4,39 +4,19 @@ import { readFileSync } from "fs";
 import { ObjectId } from "mongodb";
 import { FC } from "react";
 import matter from "gray-matter";
-import { notFound } from "next/navigation";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import HighlightedMarkdown from "@/components/Highlight";
+import Views from "@/components/View/server";
+import { BlogTitle } from "@/components/Blog";
+import { getBlogFile } from "@/utils/files";
 
 type Props = {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateStaticParams() {
-  const client = new Database();
-  try {
-    const db = await client.connect();
-    const result = await db
-      .collection("blogs")
-      .find({}, { projection: { _id: 1 } })
-      .toArray();
-
-    return result.map((doc) => doc._id);
-  } catch (e) {
-    console.log(e);
-    throw new Error("Static Generation Error");
-  } finally {
-    await client.disconnect();
-  }
-}
-
-export async function generateMetadata(
-  { params }: Props,
-  __: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.slug;
-  const client = new Database();
+  const client = Database.getInstance();
   try {
     const db = await client.connect();
 
@@ -70,49 +50,23 @@ export async function generateMetadata(
   }
 }
 
-const incViewCount = async (id: string) => {
-  const client = new Database();
-  try {
-    const db = await client.connect();
-
-    const result = await db.collection<Blog>("blogs").findOneAndUpdate(
-      { _id: new ObjectId(id) },
-      {
-        $inc: {
-          views: 1,
-        },
-      }
-    );
-
-    return result;
-  } catch (e) {
-  } finally {
-    await client.disconnect();
-  }
-};
-
-const getBlogContent = (blog: string) => {
-  try {
-    const content = readFileSync(`./_blogs/${blog}.md`, "utf-8");
-    const matterResult = matter(content);
-    return matterResult.content;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 const Page: FC<Props> = async ({ params }) => {
-  const doc = await incViewCount(params.slug);
-
-  if (!doc) notFound();
-
-  const content = getBlogContent(doc.title);
-
+  const blogTitle = params.slug.split("%20").join(" ");
+  const blogContent = getBlogFile(blogTitle);
   return (
     <main>
       <article className="prose prose-pre:bg-[#282c34] prose-code:text-white prose-base prose-p:text-lg prose-headings:text-white prose-p:text-paragraph prose-strong:text-cyan-600 prose-a:text-cyan-600 prose-li:text-paragraph prose-table:text-paragraph prose-img:rounded-lg">
-        {content ? (
-          <HighlightedMarkdown>{content}</HighlightedMarkdown>
+        {true ? (
+          <div>
+            <BlogTitle
+              title={blogTitle}
+              date={blogContent?.data.publish}
+              readTime={blogContent?.data.ttr}
+            />
+            {blogContent && (
+              <HighlightedMarkdown>{blogContent.content}</HighlightedMarkdown>
+            )}
+          </div>
         ) : (
           <p>No blogs here</p>
         )}
