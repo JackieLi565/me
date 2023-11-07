@@ -6,7 +6,7 @@ type TagProps = {
 
 const Tag: FC<TagProps> = ({ name }) => {
   return (
-    <li className="text-xs inline-block bg-cyan-950 border border-cyan-800 px-2 py-0.5 rounded">
+    <li className="text-xs text-white inline-block bg-cyan-950 border border-cyan-800 px-2 py-0.5 rounded">
       {name}
     </li>
   );

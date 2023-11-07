@@ -18,12 +18,17 @@ const getTopBlogs = async () => {
 
     const results = await db
       .collection<Blog>("blogs")
-      .aggregate<WithId<Blog>>([
+      .aggregate<Blog>([
         {
           $sort: { views: -1 },
         },
         {
           $limit: 3,
+        },
+        {
+          $project: {
+            _id: 0,
+          },
         },
       ])
       .toArray();

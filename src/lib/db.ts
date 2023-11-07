@@ -7,6 +7,7 @@ class Database {
 
   private constructor() {
     this._cluster = new MongoClient(process.env.MONGO_URI);
+    console.log("New Database Instance Created");
   }
 
   static getInstance() {

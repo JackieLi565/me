@@ -9,7 +9,7 @@ type ViewProps = {
 };
 
 const getBlogViewData = async (slug: string) => {
-  const client = new Database();
+  const client = Database.getInstance();
 
   const db = await client.connect();
   const projection = { _id: 0 };
