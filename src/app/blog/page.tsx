@@ -1,47 +1,32 @@
 import { BlogCard } from "@/components/Blog";
 import { BlogsTitle } from "@/components/Titles";
-import Database from "@/lib/db";
-import { Blog } from "@/types/types";
 import { FC } from "react";
 import Error from "@/components/Error";
+import { getBlogMetaData, getBlogTitles } from "@/utils/files";
 
-const getBlogMetaData = async () => {
-  const client = new Database();
-  try {
-    const db = await client.connect();
-
-    const data = await db.collection<Blog>("blogs").find({}).toArray();
-
-    return data;
-  } catch (e) {
-    console.log(e);
-  } finally {
-    await client.disconnect();
-  }
-};
+export const dynamic = "force-dynamic";
 
 const Page: FC = async () => {
-  const blogs = await getBlogMetaData();
+  const blogTitles = getBlogTitles() as string[];
+  const blogs = await getBlogMetaData(blogTitles);
   return (
     <main className="w-full flex flex-col gap-9 text-lg text-paragraph">
       <BlogsTitle />
       <section>
-        This is where I like to share what intrests me. Still new to it,
+        This is where I like to share what interests me. Still new to it,
         I&apos;m always open for feedback.
       </section>
-      <section className="space-y-3">
+      <section className="space-y-10">
         {blogs && blogs.length > 0 ? (
           blogs.map((blog) => {
-            const key = blog._id.toString();
             return (
               <BlogCard
-                key={key}
+                key={blog.title}
                 title={blog.title}
-                views={blog.views}
                 date={blog.publish}
                 tags={blog.tags}
                 readTime={blog.ttr}
-                id={key}
+                description={blog.description}
               />
             );
           })

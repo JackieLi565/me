@@ -1,11 +1,19 @@
 import { MongoClient } from "mongodb";
 
 class Database {
+  private static _Instance: Database | undefined;
   private _cluster: MongoClient;
   private _database = "me";
 
-  constructor() {
+  private constructor() {
     this._cluster = new MongoClient(process.env.MONGO_URI);
+    console.log("New Database Instance Created");
+  }
+
+  static getInstance() {
+    if (!Database._Instance) Database._Instance = new Database();
+
+    return Database._Instance;
   }
 
   async connect() {

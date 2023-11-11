@@ -3,7 +3,7 @@ import { StaticImageData } from "next/image";
 import { FC, useRef } from "react";
 import Image from "next/image";
 import Tag from "../Tag";
-import { LinkOutlined } from "@ant-design/icons";
+import { LinkOutlined, GithubOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 type ProjectProps = {
@@ -11,16 +11,17 @@ type ProjectProps = {
   name: string;
   description: string;
   tags: string[];
-  href: string;
-  reverse?: boolean;
+  links?: {
+    github?: string;
+    exp?: string;
+  };
 };
 const Project: FC<ProjectProps> = ({
   image,
   name,
   description,
   tags,
-  href,
-  reverse = false,
+  links,
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
@@ -35,40 +36,43 @@ const Project: FC<ProjectProps> = ({
         opacity: scrollYProgress,
       }}
       ref={ref}
-      className="flex flex-col-reverse gap-4 md:grid md:grid-cols-8 md:mb-16"
+      className="border-neutral-600 border rounded-md group"
     >
-      <Link
-        href={href}
-        target="_blank"
-        className={`row-span-full group md:translate-y-2/3 ${
-          reverse ? "md:col-end-9" : "md:col-start-1 "
-        } col-span-5 self-center flex flex-col z-20 bg-neutral-800 border border-neutral-600 rounded-md py-4 px-5 space-y-2`}
-      >
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl text-cyan-600 ">{name}</h1>
-          <LinkOutlined className="group-hover:text-cyan-600 transition-colors duration-150" />
-        </div>
-        <p className="text-sm md:text-base text-paragraph md:px-2 leading-7">
-          {description}
-        </p>
-        <ul className="flex flex-wrap gap-2">
-          {tags.map((tag) => {
-            return <Tag key={tag} name={tag} />;
-          })}
-        </ul>
-      </Link>
+      <div>
+        <Link
+          href={(links && links?.github) || links?.exp || ""}
+          target="_blank"
+        >
+          <Image className="rounded-t-md" src={image} alt="" />
+        </Link>
 
-      <div
-        className={`row-span-full col-span-6 ${
-          reverse ? "md:col-start-1" : "md:col-end-9"
-        } self-center relative group hover:z-20`}
-      >
-        <div className="md:absolute justify-center md:bg-cyan-900 w-full h-full rounded-lg md:bg-opacity-80 group-hover:bg-opacity-0 transition-opacity"></div>
-        <Image
-          className="border border-neutral-600 rounded-lg md:opacity-80 md:group-hover:opacity-100 transition-opacity"
-          src={image}
-          alt=""
-        />
+        <div className="bg-neutral-800 space-y-3 rounded-b-md py-4 px-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl group-hover:text-cyan-600 transition-colors">
+              {name}
+            </h1>
+            {links && (
+              <div className="text-2xl flex gap-3">
+                {links.github && (
+                  <Link href={links.github} target="_blank">
+                    <GithubOutlined className="hover:text-cyan-600 transition-colors" />
+                  </Link>
+                )}
+                {links.exp && (
+                  <Link href={links.exp} target="_blank">
+                    <LinkOutlined className="hover:text-cyan-600 transition-colors" />
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
+          <p className="text-lg text-paragraph">{description}</p>
+          <ul className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <Tag key={tag} name={tag} />
+            ))}
+          </ul>
+        </div>
       </div>
     </motion.div>
   );
