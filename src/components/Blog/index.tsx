@@ -23,29 +23,29 @@ export const BlogCard: FC<BlogCardProps> = ({
   return (
     <Link
       href={`/blog/${title}`}
-      className="flex group justify-between items-center rounded-md"
+      className="block space-y-3 md:space-y-2 group rounded-md"
     >
-      <div className="space-y-2">
+      <div className="justify-between items-center flex gap-5">
         <h1 className="text-2xl text-cyan-600">{title}</h1>
-        <p className="text-paragraph italic text-base">
-          {date.toLocaleString("default", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}{" "}
-          &#x2022; {readTime} min read &#x2022;{" "}
-          <Suspense fallback={<span>fetching</span>}>
-            <Views slug={title} />
-          </Suspense>{" "}
-        </p>
-        <p>{description}</p>
-        <div className="space-x-2">
-          {tags.map((tag) => {
-            return <Tag key={tag} name={tag} />;
-          })}
-        </div>
+        <LinkOutlined className="group-hover:text-cyan-600 transition-colors duration-150" />
       </div>
-      <LinkOutlined className="group-hover:text-cyan-600 transition-colors duration-150" />
+      <p className="text-paragraph italic text-base">
+        {date.toLocaleString("default", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}{" "}
+        &#x2022; {readTime} min read &#x2022;{" "}
+        <Suspense fallback={<span>fetching</span>}>
+          <Views slug={title} />
+        </Suspense>{" "}
+      </p>
+      <p>{description}</p>
+      <div className="space-x-2">
+        {tags.map((tag) => {
+          return <Tag key={tag} name={tag} />;
+        })}
+      </div>
     </Link>
   );
 };

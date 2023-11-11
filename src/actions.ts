@@ -3,7 +3,7 @@ import Database from "./lib/db";
 import { Blog } from "./types/types";
 
 export const incViewCount = async (title: string) => {
-  const client = new Database();
+  const client = Database.getInstance();
   try {
     const db = await client.connect();
 

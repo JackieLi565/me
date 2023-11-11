@@ -5,7 +5,6 @@ import Title from "@/components/Titles";
 import Reveal from "@/components/Animation";
 import Database from "@/lib/db";
 import { Blog } from "@/types/types";
-import { WithId } from "mongodb";
 import TextLogo from "@/components/TextLogo";
 import Error from "@/components/Error";
 import { getBlogMetaData } from "@/utils/files";

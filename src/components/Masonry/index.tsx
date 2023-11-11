@@ -1,12 +1,10 @@
 "use client";
 import nanaimo from "../../../public/gallery/nanaimo.jpg";
-import spybird from "../../../public/gallery/spyBird.jpg";
 import squamish from "../../../public/gallery/squam.jpg";
 import cne from "../../../public/gallery/cne.jpg";
 import bike from "../../../public/gallery/nukeproof.jpg";
 import query from "../../../public/gallery/eastvan.jpg";
 import riverdale from "../../../public/gallery/riverdale.jpg";
-import bike2 from "../../../public/gallery/bike.jpg";
 
 import Image, { StaticImageData } from "next/image";
 import { FC } from "react";

@@ -9,14 +9,12 @@ const Title: FC = () => {
     1500,
     "hey, it's jackie i'm a student",
     1500,
-    "hey, it's jackie i'm a outdoorist",
-    1500,
     "hey, it's jackie i'm a engineer ",
     1500,
   ];
   return (
     <TypeAnimation
-      className="text-3xl font-semibold text-white"
+      className="text-3xl font-semibold text-white h-20 sm:h-fit"
       sequence={seq}
       repeat={Infinity}
     />
@@ -44,7 +42,7 @@ export const AboutTitle = () => {
 };
 
 export const BlogsTitle = () => {
-  const seq = ["i like to write about intresting tech!"];
+  const seq = ["i like to write about interesting tech!"];
   return (
     <TypeAnimation
       className="text-3xl font-semibold text-white"

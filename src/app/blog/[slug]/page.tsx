@@ -6,9 +6,9 @@ import { FC } from "react";
 import matter from "gray-matter";
 import type { Metadata } from "next";
 import HighlightedMarkdown from "@/components/Highlight";
-import Views from "@/components/View/server";
 import { BlogTitle } from "@/components/Blog";
 import { getBlogFile } from "@/utils/files";
+import { default as CatError } from "@/components/Error";
 
 type Props = {
   params: { slug: string };
@@ -53,23 +53,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const Page: FC<Props> = async ({ params }) => {
   const blogTitle = params.slug.split("%20").join(" ");
   const blogContent = getBlogFile(blogTitle);
+
+  if (!blogContent)
+    return (
+      <main>
+        <CatError
+          message={`Not Sure If I've Ever Written About ${blogTitle} Before`}
+        />
+      </main>
+    );
   return (
     <main>
       <article className="prose prose-pre:bg-[#282c34] prose-code:text-white prose-base prose-p:text-lg prose-headings:text-white prose-p:text-paragraph prose-strong:text-cyan-600 prose-a:text-cyan-600 prose-li:text-paragraph prose-table:text-paragraph prose-img:rounded-lg">
-        {true ? (
-          <div>
-            <BlogTitle
-              title={blogTitle}
-              date={blogContent?.data.publish}
-              readTime={blogContent?.data.ttr}
-            />
-            {blogContent && (
-              <HighlightedMarkdown>{blogContent.content}</HighlightedMarkdown>
-            )}
-          </div>
-        ) : (
-          <p>No blogs here</p>
-        )}
+        <div>
+          <BlogTitle
+            title={blogTitle}
+            date={blogContent.data.publish}
+            readTime={blogContent.data.ttr}
+          />
+          {blogContent && (
+            <HighlightedMarkdown>{blogContent.content}</HighlightedMarkdown>
+          )}
+        </div>
       </article>
     </main>
   );

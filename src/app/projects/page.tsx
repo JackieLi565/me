@@ -11,7 +11,7 @@ const Page: FC = () => {
       <ProjectTitle />
       <p className="text-lg text-paragraph">
         I always try to incorporate technology that I find really cool and
-        exciting. Checkout some of the stuff I've been working on!
+        exciting. Checkout some of the stuff I&apos;ve been working on!
       </p>
       <section className="space-y-12">
         <Project

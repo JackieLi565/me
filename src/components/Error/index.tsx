@@ -8,8 +8,8 @@ type ErrorProps = {
 const Error: FC<ErrorProps> = ({ message }) => {
   return (
     <div className="flex flex-col items-center gap-4">
-      <Image src={cat} alt="sleepy cat" className="md:w-32 w-24" />
-      <h2 className="font-code text-paragraph md:text-2xl text-xl text-center">
+      <Image src={cat} alt="sleepy cat" className="md:w-32 w-24 m-0" />
+      <h2 className="font-code text-paragraph md:text-2xl text-xl text-center m-0">
         {message}
       </h2>
     </div>
