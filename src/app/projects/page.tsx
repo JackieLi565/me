@@ -20,7 +20,7 @@ const Page: FC = () => {
           }}
           image={sf}
           name="SpotiFamily"
-          description="A Spotify family plan manager created to help me organize and keep track of payments."
+          description="A Spotify family plan manager, created to help me organize and keep track of payments."
           tags={[
             "Next.js 13",
             "TypeScript",
@@ -35,7 +35,7 @@ const Page: FC = () => {
           }}
           image={stre}
           name="Streamify"
-          description="A Spotify family plan manager created to help me organize and keep track of payments."
+          description="Watch, chat, and explore Youtube videos."
           tags={["Next.js", "TypeScript", "Express.js", "Websockets", "OpenAI"]}
         />
         <div className="border-b border-neutral-600 w-full"></div>
