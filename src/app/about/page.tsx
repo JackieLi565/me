@@ -14,21 +14,23 @@ const Page: FC = () => {
   return (
     <main className="w-full text-lg text-paragraph flex flex-col gap-9">
       <AboutTitle />
-      <Reveal delay={0.4}>
+      <Reveal>
         <div className="flex flex-col md:flex-row gap-8 items-center">
-          <div className="bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 rounded-full p-0.5 ">
+          <div className="bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 rounded-lg p-0.5 ">
             <Image
               src={me}
               alt="Jump Scare"
-              className=" w-44 md:w-96 rounded-full"
+              className=" w-44 md:w-96 rounded-lg"
             />
           </div>
           <p className=" leading-9">
             So you probably know by now, but for those who don&apos;t my name is
             <span className="text-cyan-600 font-semibold"> Jackie Li</span>. I
-            have been learning{" "}
-            <span className="text-cyan-600 font-semibold">web development</span>{" "}
-            for about a year and I&apos;ve enjoyed every single minute of it.
+            have been exploring{" "}
+            <span className="text-cyan-600 font-semibold">
+              application development
+            </span>{" "}
+            for quite some time and I&apos;ve enjoyed every single minute of it.
           </p>
         </div>
       </Reveal>
@@ -81,9 +83,9 @@ const Page: FC = () => {
           department.
         </p>
       </Reveal>
-      <Reveal delay={0.6}>
+      <Reveal>
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Matcha time? 🍵</h2>
+          <h2 className="text-2xl font-semibold text-white">Matcha time? 🍵</h2>
           <p className="leading-9">
             I&apos;m not too big on coffee but that&apos;s really where my
             journey started. But if you&apos;d like to learn more I&apos;m happy
@@ -101,13 +103,13 @@ const Page: FC = () => {
 
       <Reveal>
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Resume</h2>
+          <h2 className="text-2xl font-semibold text-white">Resume</h2>
           <p className="leading-9">
             Click for my{" "}
             <a
               target="_blank"
               className="text-cyan-600 font-semibold italic"
-              href="/Jackie_Li_CV.pdf"
+              href="/Jackie_Li.pdf"
             >
               resume
             </a>

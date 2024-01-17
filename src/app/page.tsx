@@ -35,19 +35,18 @@ const getTopBlogs = async () => {
     return results.map((doc) => doc.title);
   } catch (e) {
     console.log(e);
+    return [];
   } finally {
     await client.disconnect();
   }
 };
 
 const Page = async () => {
-  const blogTitles = await getTopBlogs();
+  // const blogTitles = await getTopBlogs();
 
-  if (!blogTitles) return <></>;
-
-  const topBlogData = await getBlogMetaData(
-    blogTitles.map((title) => title + ".md")
-  );
+  // const topBlogData = await getBlogMetaData(
+  //   blogTitles.map((title) => title + ".md")
+  // );
 
   return (
     <main className="w-full flex flex-col gap-9">
@@ -73,17 +72,18 @@ const Page = async () => {
       </p>
       <Masonry />
 
-      <Reveal delay={0.7}>
+      <Reveal>
         <section className="space-y-4 text-lg text-paragraph ">
           <h1 className="text-2xl font-semibold text-white">
             What&apos;s Currently Cooking 👩🏻‍🍳
           </h1>
           <p className=" text-paragraph leading-9">
-            Hey! Checkout some of my blogs that are currently trending!
+            Hey! Looks like theres nothing trending at the moment, come check
+            back at a later time.
           </p>
 
           <div className="space-y-8 mt-5">
-            {topBlogData && topBlogData.length > 0 ? (
+            {/* {topBlogData && topBlogData.length > 0 ? (
               topBlogData.map((blog) => {
                 return (
                   <BlogCard
@@ -97,8 +97,9 @@ const Page = async () => {
                 );
               })
             ) : (
-              <Error message="Where Did My Blogs Go?" />
-            )}
+              
+            )} */}
+            <Error message="Where Did My Blogs Go?" />
           </div>
         </section>
       </Reveal>

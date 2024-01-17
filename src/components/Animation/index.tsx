@@ -7,7 +7,7 @@ type RevealProps = {
   delay?: number;
 };
 
-const Reveal: FC<RevealProps> = ({ children, delay = 0.5 }) => {
+const Reveal: FC<RevealProps> = ({ children, delay = 0.2 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true });
   const mainControls = useAnimation();

@@ -1,14 +1,12 @@
-import { BlogCard } from "@/components/Blog";
+import { BlogContainer } from "@/components/Blog";
 import { BlogsTitle } from "@/components/Titles";
-import { FC } from "react";
-import Error from "@/components/Error";
-import { getBlogMetaData, getBlogTitles } from "@/utils/files";
+import { FC, Suspense } from "react";
+import loadingIcon from "../../../public/loader.svg";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
-const Page: FC = async () => {
-  const blogTitles = getBlogTitles() as string[];
-  const blogs = await getBlogMetaData(blogTitles);
+const Page: FC = () => {
   return (
     <main className="w-full flex flex-col gap-9 text-lg text-paragraph">
       <BlogsTitle />
@@ -17,24 +15,19 @@ const Page: FC = async () => {
         I&apos;m always open for feedback.
       </section>
       <section className="space-y-10">
-        {blogs && blogs.length > 0 ? (
-          blogs.map((blog) => {
-            return (
-              <BlogCard
-                key={blog.title}
-                title={blog.title}
-                date={blog.publish}
-                tags={blog.tags}
-                readTime={blog.ttr}
-                description={blog.description}
-              />
-            );
-          })
-        ) : (
-          <Error message="Where Did My Blogs Go?" />
-        )}
+        <Suspense fallback={<Loader />}>
+          <BlogContainer />
+        </Suspense>
       </section>
     </main>
+  );
+};
+
+const Loader: FC = () => {
+  return (
+    <div className="flex flex-col items-center">
+      <Image src={loadingIcon} alt="loading bars" className="w-[80px]"></Image>
+    </div>
   );
 };
 
