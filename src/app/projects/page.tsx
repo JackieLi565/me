@@ -13,8 +13,8 @@ const Page: FC = () => {
       <ProjectTitle />
       <p className="text-lg text-paragraph">
         Hey! I like building things that make a social impact. Here you can find
-        some of the latest projects I've worked on. If you have any questions
-        regarding my projects or you want to build something together{" "}
+        some of the latest projects I&apos;ve worked on. If you have any
+        questions regarding my projects or you want to build something together{" "}
         <Link href={"/about"} className="text-cyan-600">
           reach out!
         </Link>
