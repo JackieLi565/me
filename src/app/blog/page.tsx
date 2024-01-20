@@ -4,8 +4,6 @@ import { FC, Suspense } from "react";
 import loadingIcon from "../../../public/loader.svg";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
-
 const Page: FC = () => {
   return (
     <main className="w-full flex flex-col gap-9 text-lg text-paragraph">
