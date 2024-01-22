@@ -3,40 +3,34 @@ import matter from "gray-matter";
 import { promisify } from "util";
 import { readdirSync, readFile } from "fs";
 import { BlogMeta } from "@/types/types";
+import path from "path";
 const asyncReadFile = promisify(readFile);
 
-export const getBlogFile = (blog: string) => {
-  try {
-    const content = readFileSync(`./_blogs/${blog}.md`, "utf-8");
-    const matterResult = matter(content);
-    return matterResult;
-  } catch (e) {
-    console.log(e);
-  }
+const blogDir = path.join(process.cwd(), "public", "blogs");
+
+export const getBlogFile = (title: string) => {
+  const content = readFileSync(path.join(blogDir, title, "index.md"), "utf-8");
+  const matterResult = matter(content);
+  return matterResult;
 };
 
 export const getBlogTitles = () => {
-  const dir = "./_blogs";
-  try {
-    const blogFiles = readdirSync(dir);
-    return blogFiles;
-  } catch (e: any) {
-    console.log(e);
-  }
+  const blogFiles = readdirSync(blogDir);
+  return blogFiles;
 };
 
-export const getBlogMetaData = async (blogTitles: string[]) => {
-  const rootDir = "./_blogs";
-  try {
-    const metaPromise = blogTitles.map((title) => {
-      return asyncReadFile(`${rootDir}/${title}`, { encoding: "utf-8" });
+export const getBlogMetaData = async (blogDirs: string[]) => {
+  const metaPromise = blogDirs.map((dir) => {
+    return asyncReadFile(path.join(blogDir, dir, "index.md"), {
+      encoding: "utf-8",
     });
+  });
 
-    const metaData = await Promise.all(metaPromise);
-    const data = metaData.map((data) => matter(data).data as BlogMeta);
+  const metaData = await Promise.all(metaPromise);
+  const data = metaData.map((data, idx) => ({
+    meta: matter(data).data as BlogMeta,
+    dir: blogDirs[idx],
+  }));
 
-    return data;
-  } catch (e: any) {
-    console.log(e);
-  }
+  return data;
 };

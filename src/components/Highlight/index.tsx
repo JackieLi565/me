@@ -21,9 +21,11 @@ const HighlightedMarkdown: FC<HighlightedMarkdownProps> = ({ children }) => {
   }, [children]);
 
   return (
-    <div ref={rootRef}>
-      <Markdown>{children}</Markdown>
-    </div>
+    <article className="prose-headings:font-light prose-li:text-base prose-ul:text-base prose-ol:text-base">
+      <div ref={rootRef}>
+        <Markdown>{children}</Markdown>
+      </div>
+    </article>
   );
 };
 

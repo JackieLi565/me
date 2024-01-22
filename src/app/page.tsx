@@ -3,51 +3,14 @@ import tmu from "../../public/svg/tmu.svg";
 import next from "../../public/svg/next.svg";
 import Title from "@/components/Titles";
 import Reveal from "@/components/Animation";
-import Database from "@/lib/db";
-import { Blog } from "@/types/types";
 import TextLogo from "@/components/TextLogo";
 import Error from "@/components/Error";
-import { getBlogMetaData } from "@/utils/files";
-import { BlogCard } from "@/components/Blog";
-
-const getTopBlogs = async () => {
-  const client = Database.getInstance();
-  try {
-    const db = await client.connect();
-
-    const results = await db
-      .collection<Blog>("blogs")
-      .aggregate<Blog>([
-        {
-          $sort: { views: -1 },
-        },
-        {
-          $limit: 3,
-        },
-        {
-          $project: {
-            _id: 0,
-          },
-        },
-      ])
-      .toArray();
-
-    return results.map((doc) => doc.title);
-  } catch (e) {
-    console.log(e);
-    return [];
-  } finally {
-    await client.disconnect();
-  }
-};
+import { getBlogMetaData, getBlogTitles } from "@/utils/files";
+import { BlogCard } from "@/components/Blog/BlogCard";
+import { Suspense } from "react";
+import Loader from "@/components/Loader";
 
 const Page = async () => {
-  // const blogTitles = await getTopBlogs();
-
-  // const topBlogData = await getBlogMetaData(
-  //   blogTitles.map((title) => title + ".md")
-  // );
-
   return (
     <main className="w-full flex flex-col gap-9">
       <Title />
@@ -78,32 +41,41 @@ const Page = async () => {
             What&apos;s Currently Cooking 👩🏻‍🍳
           </h1>
           <p className=" text-paragraph leading-9">
-            Hey! Looks like theres nothing trending at the moment, come check
-            back at a later time.
+            Hey! Check out what I&apos;ve been recently writing about.
           </p>
 
-          <div className="space-y-8 mt-5">
-            {/* {topBlogData && topBlogData.length > 0 ? (
-              topBlogData.map((blog) => {
-                return (
-                  <BlogCard
-                    key={blog.title}
-                    title={blog.title}
-                    date={blog.publish}
-                    tags={blog.tags}
-                    readTime={blog.ttr}
-                    description={blog.description}
-                  />
-                );
-              })
-            ) : (
-              
-            )} */}
-            <Error message="Where Did My Blogs Go?" />
-          </div>
+          <Suspense fallback={<Loader />}>
+            <TopBlogContainer />
+          </Suspense>
         </section>
       </Reveal>
     </main>
+  );
+};
+
+const TopBlogContainer = async () => {
+  const blogTitles = getBlogTitles();
+  const topBlogData = await getBlogMetaData(blogTitles);
+
+  return (
+    <div className="space-y-8 mt-5">
+      {topBlogData && topBlogData.length > 0 ? (
+        topBlogData.map(({ meta, dir }) => {
+          return (
+            <BlogCard
+              key={dir}
+              title={dir}
+              publish={meta.publish}
+              tags={meta.tags}
+              ttr={meta.ttr}
+              description={meta.description}
+            />
+          );
+        })
+      ) : (
+        <Error message="Where Did My Blogs Go?" />
+      )}
+    </div>
   );
 };
 

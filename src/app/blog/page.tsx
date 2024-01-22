@@ -1,17 +1,14 @@
-import { BlogContainer } from "@/components/Blog";
 import { BlogsTitle } from "@/components/Titles";
 import { FC, Suspense } from "react";
-import loadingIcon from "../../../public/loader.svg";
-import Image from "next/image";
+import Error from "@/components/Error";
+import { getBlogMetaData, getBlogTitles } from "@/utils/files";
+import { BlogCard } from "@/components/Blog/BlogCard";
+import Loader from "@/components/Loader";
 
 const Page: FC = () => {
   return (
     <main className="w-full flex flex-col gap-9 text-lg text-paragraph">
       <BlogsTitle />
-      <section>
-        This is where I like to share what interests me. Still new to it,
-        I&apos;m always open for feedback.
-      </section>
       <section className="space-y-10">
         <Suspense fallback={<Loader />}>
           <BlogContainer />
@@ -21,11 +18,29 @@ const Page: FC = () => {
   );
 };
 
-const Loader: FC = () => {
+const BlogContainer: FC = async () => {
+  const blogTitles = getBlogTitles();
+  const blogs = await getBlogMetaData(blogTitles);
+
   return (
-    <div className="flex flex-col items-center">
-      <Image src={loadingIcon} alt="loading bars" className="w-[80px]"></Image>
-    </div>
+    <>
+      {blogs && blogs.length > 0 ? (
+        blogs.map(({ meta, dir }) => {
+          return (
+            <BlogCard
+              key={dir}
+              title={dir}
+              publish={meta.publish}
+              tags={meta.tags}
+              ttr={meta.ttr}
+              description={meta.description}
+            />
+          );
+        })
+      ) : (
+        <Error message="Where Did My Blogs Go?" />
+      )}
+    </>
   );
 };
 
