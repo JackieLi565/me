@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/speed-insights": "^1.0.9",
     "framer-motion": "^10.16.4",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",

@@ -8,6 +8,8 @@ import {
   MediumOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Jackie Li",
@@ -39,6 +41,8 @@ export default function RootLayout({
             </Link>
           </div>
         </footer>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
