@@ -1,8 +1,9 @@
 ---
+title: Message Queues
+description: What exactly are message queues, and how do they contribute to asynchronous processing. Additionally, what are the  benefits from using message queues in microservice communication?
 publish: January 15, 2024
 ttr: 9
 tags: ["Message Queue", "Kafka", "Docker", "Microservices"]
-description: What exactly are message queues, and how do they contribute to asynchronous processing. Additionally, what are the  benefits from using message queues in microservice communication?
 ---
 
 Recently I've been reading through some user feedback for one of my work applications and noticed that when an admin or manager invites a user to the system it takes on average ~2 seconds for some sort of response. During development time it was never something I thought about until now. The first thing that came to mind was the e-mail api. I did some testing where I removed the e-mail invitations which resulted in the response feeling more snappy (as it should be). Although I found the bottleneck, I was unsure of how I could improve upon the current situation, after a bit of digging the term "message queues" frequently popped up.
@@ -29,13 +30,13 @@ Before we move on lets go back to the basics and understand what synchronous and
 
 Synchronous processing requires some process to fully complete before moving onto the next step. For example, we can think of a server api which a client sends a request to. While the server processes the request, the client must wait for a response before it can continue with other tasks. This is known as 'blocking' as the client is unable to complete other tasks while it waits.
 
-<img src="/blogs/Message-Queues/synchronous.png"/>
+<img src="/md/message-queues/synchronous.png"/>
 
 ### Asynchronous Processing
 
 Conversely, asynchronous processing involves tasks that don't require immediate attention. Going back to the problem I faced in the beginning, sending emails shouldn't require immediate attention. Instead, the client should invite the user and continue with other tasks instead of waiting for the email request to process. This is known as 'non-blocking'.
 
-<img src="/blogs/Message-Queues/asynchronous.png"/>
+<img src="/md/message-queues/asynchronous.png"/>
 
 ### Message Queues & The Benefits
 
@@ -245,7 +246,7 @@ The result should be a list of messages being printed out to the console.
 
 To make sure that both 'microservices' are properly communicating run both scripts and you should see the following in the terminal
 
-<img src="/blogs/Message-Queues/result.png"/>
+<img src="/md/message-queues/result.png"/>
 
 Hopefully with this short example you can kinda understand the idea of a message queue.
 

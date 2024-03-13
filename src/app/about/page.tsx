@@ -4,11 +4,11 @@ import me from "../../../public/headshot.jpg";
 import Image from "next/image";
 import Reveal from "@/components/Animation";
 import TextLogo from "@/components/TextLogo";
-import tmu from "../../../public/svg/tmu.svg";
-import java from "../../../public/svg/java.svg";
-import react from "../../../public/svg/react.svg";
-import tmr from "../../../public/svg/tmr.png";
-import js from "../../../public/svg/js.svg";
+import tmu from "../../../public/logos/tmu.svg";
+import java from "../../../public/logos/java.svg";
+import react from "../../../public/logos/react.svg";
+import tmr from "../../../public/logos/tmr.png";
+import js from "../../../public/logos/js.svg";
 
 const Page: FC = () => {
   return (

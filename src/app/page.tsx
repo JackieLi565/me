@@ -1,14 +1,15 @@
 import Masonry from "@/components/Masonry";
-import tmu from "../../public/svg/tmu.svg";
-import next from "../../public/svg/next.svg";
+import tmu from "../../public/logos/tmu.svg";
+import next from "../../public/logos/next.svg";
 import Title from "@/components/Titles";
 import Reveal from "@/components/Animation";
 import TextLogo from "@/components/TextLogo";
 import Error from "@/components/Error";
-import { getBlogMetaData, getBlogTitles } from "@/utils/files";
+import { getMdMetaData, getMdFiles } from "@/utils/files";
 import { BlogCard } from "@/components/Blog/BlogCard";
 import { Suspense } from "react";
 import Loader from "@/components/Loader";
+import { BlogMeta } from "@/types";
 
 const Page = async () => {
   return (
@@ -54,17 +55,19 @@ const Page = async () => {
 };
 
 const TopBlogContainer = async () => {
-  const blogTitles = getBlogTitles();
-  const topBlogData = await getBlogMetaData(blogTitles);
+  const mdTitles = await getMdFiles();
+  const promises = mdTitles.map((title) => getMdMetaData(title));
+  const topBlogData = (await Promise.all(promises)) as BlogMeta[];
 
   return (
     <div className="space-y-8 mt-5">
-      {topBlogData && topBlogData.length > 0 ? (
-        topBlogData.map(({ meta, dir }) => {
+      {topBlogData.length > 0 ? (
+        topBlogData.map((meta, i) => {
           return (
             <BlogCard
-              key={dir}
-              title={dir}
+              key={meta.title}
+              path={mdTitles[i]}
+              title={meta.title}
               publish={meta.publish}
               tags={meta.tags}
               ttr={meta.ttr}

@@ -4,6 +4,7 @@ import { FC } from "react";
 import Tag from "../Tag";
 
 type BlogCardProps = {
+  path: string;
   title: string;
   publish: Date;
   ttr: number;
@@ -12,13 +13,14 @@ type BlogCardProps = {
 };
 
 export const BlogCard: FC<BlogCardProps> = ({
+  path,
   title,
   publish,
   tags,
   ttr,
   description,
 }) => {
-  const blogLink = `/blog/${title}`;
+  const blogLink = `/blog/${path}`;
   const blogDate = publish.toLocaleString("default", {
     day: "numeric",
     month: "long",

@@ -1,36 +1,41 @@
-import { readFileSync } from "fs";
 import matter from "gray-matter";
 import { promisify } from "util";
-import { readdirSync, readFile } from "fs";
-import { BlogMeta } from "@/types/types";
+import { promises as fs } from "fs";
+import { BlogMeta } from "@/types";
 import path from "path";
-const asyncReadFile = promisify(readFile);
+const { readFile, readdir } = fs;
 
-const blogDir = path.join(process.cwd(), "public", "blogs");
+const mdDir = path.join(process.cwd(), "src", "md");
 
-export const getBlogFile = (title: string) => {
-  const content = readFileSync(path.join(blogDir, title, "index.md"), "utf-8");
-  const matterResult = matter(content);
-  return matterResult;
+/**
+ * @param name Must be name of the file without extension
+ */
+export const getMdContent = async (name: string) => {
+  try {
+    const file = `${name}.md`;
+    const content = await readFile(path.join(mdDir, file), "utf-8");
+    const matterResult = matter(content);
+    return matterResult;
+  } catch (e) {
+    return null;
+  }
 };
 
-export const getBlogTitles = () => {
-  const blogFiles = readdirSync(blogDir);
-  return blogFiles;
+/**
+ * @returns { Promise<string[]> } Strings have extensions removed
+ * @description Returns a list of known file names therefore getMdMetaData & getMdContent
+ * will always return the file data and not null
+ */
+export const getMdFiles = async (): Promise<string[]> => {
+  const blogFiles = await readdir(mdDir);
+  return blogFiles.map((file) => file.slice(0, -3));
 };
 
-export const getBlogMetaData = async (blogDirs: string[]) => {
-  const metaPromise = blogDirs.map((dir) => {
-    return asyncReadFile(path.join(blogDir, dir, "index.md"), {
-      encoding: "utf-8",
-    });
-  });
+/**
+ * @param name Must be name of the file without extension
+ */
+export const getMdMetaData = async (name: string) => {
+  const matterResult = await getMdContent(name);
 
-  const metaData = await Promise.all(metaPromise);
-  const data = metaData.map((data, idx) => ({
-    meta: matter(data).data as BlogMeta,
-    dir: blogDirs[idx],
-  }));
-
-  return data;
+  return matterResult ? (matterResult.data as BlogMeta) : null;
 };

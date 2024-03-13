@@ -1,9 +1,10 @@
 import { BlogsTitle } from "@/components/Titles";
 import { FC, Suspense } from "react";
 import Error from "@/components/Error";
-import { getBlogMetaData, getBlogTitles } from "@/utils/files";
+import { getMdMetaData, getMdFiles } from "@/utils/files";
 import { BlogCard } from "@/components/Blog/BlogCard";
 import Loader from "@/components/Loader";
+import { BlogMeta } from "@/types";
 
 const Page: FC = () => {
   return (
@@ -19,17 +20,19 @@ const Page: FC = () => {
 };
 
 const BlogContainer: FC = async () => {
-  const blogTitles = getBlogTitles();
-  const blogs = await getBlogMetaData(blogTitles);
+  const mdTitles = await getMdFiles();
+  const promises = mdTitles.map((title) => getMdMetaData(title));
+  const blogs = (await Promise.all(promises)) as BlogMeta[];
 
   return (
     <>
-      {blogs && blogs.length > 0 ? (
-        blogs.map(({ meta, dir }) => {
+      {blogs.length > 0 ? (
+        blogs.map((meta, i) => {
           return (
             <BlogCard
-              key={dir}
-              title={dir}
+              key={meta.title}
+              path={mdTitles[i]}
+              title={meta.title}
               publish={meta.publish}
               tags={meta.tags}
               ttr={meta.ttr}

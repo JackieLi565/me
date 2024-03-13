@@ -1,5 +1,4 @@
 import { LinkOutlined } from "@ant-design/icons";
-import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { FC, ReactElement } from "react";
 type Props = {

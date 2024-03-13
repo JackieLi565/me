@@ -4,12 +4,13 @@ import { FC } from "react";
 import { TypeAnimation } from "react-type-animation";
 
 const Title: FC = () => {
+  const prefix = "hey, it's jackie i'm";
   const seq = [
-    "hey, it's jackie i'm a développeur",
+    `${prefix} a développeur`,
     1500,
-    "hey, it's jackie i'm a student",
+    `${prefix} a student`,
     1500,
-    "hey, it's jackie i'm a engineer ",
+    `${prefix} an engineer`,
     1500,
   ];
   return (

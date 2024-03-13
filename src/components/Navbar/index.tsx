@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { Link as SubLink } from "@/types/types";
+import { Link as SubLink } from "@/types";
 import Link from "next/link";
 import { FC } from "react";
 import Image from "next/image";

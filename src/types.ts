@@ -11,6 +11,8 @@ export type Blog = {
 };
 
 export type BlogMeta = {
+  // title of blog
+  title: string;
   // date published
   publish: Date;
   // the time if takes to read the blog

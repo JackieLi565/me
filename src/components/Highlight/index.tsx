@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useEffect, FC } from "react";
 import Markdown from "markdown-to-jsx";
-import hljs from "highlight.js";
+import hljs from "highlight.js"; // oh my days the import size for this is so big
 import "highlight.js/styles/atom-one-dark.css";
 
 interface HighlightedMarkdownProps {
