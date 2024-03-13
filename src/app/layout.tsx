@@ -30,7 +30,7 @@ export default function RootLayout({
         <footer className="mt-16 mb-28 flex justify-between items-center">
           <p>&copy; Jackie Li</p>
           <div className="space-x-4">
-            <Link href={"https://www.linkedin.com/in/jackie-li-725944175/"}>
+            <Link href={"https://www.linkedin.com/in/jackieli565/"}>
               <LinkedinOutlined className="text-2xl " />
             </Link>
             <Link href={"https://github.com/JackieLi565"}>
