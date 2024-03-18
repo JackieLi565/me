@@ -85,6 +85,7 @@ const ImageCard: FC<ImageCardProps> = ({ image, title, description, alt }) => {
       <Image
         className="rounded-lg opacity-0 transition-opacity duration-300"
         onLoadingComplete={finishLoad}
+        priority={true}
         src={image}
         alt={alt}
       />

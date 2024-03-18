@@ -30,16 +30,6 @@ const Project: FC<ProjectProps> = ({
   });
   const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
 
-  const GenerateLink = (ele: ReactElement, link?: string) => {
-    if (!link) return ele;
-
-    return (
-      <Link href={link} target="_blank">
-        {ele}
-      </Link>
-    );
-  };
-
   return (
     <motion.div
       style={{
@@ -51,8 +41,7 @@ const Project: FC<ProjectProps> = ({
     >
       {GenerateLink(
         <>
-          <Image className="rounded-t-md" src={image} alt="" />
-
+          <Image className="rounded-t-md" src={image} alt={`${name} image`} />
           <div className="bg-neutral-800 space-y-3 rounded-b-md py-4 px-6">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl group-hover:text-cyan-600 transition-colors">
@@ -80,6 +69,16 @@ const Project: FC<ProjectProps> = ({
         (links && links?.github) || links?.exp
       )}
     </motion.div>
+  );
+};
+
+const GenerateLink = (ele: ReactElement, link?: string) => {
+  if (!link) return ele;
+
+  return (
+    <Link href={link} target="_blank">
+      {ele}
+    </Link>
   );
 };
 

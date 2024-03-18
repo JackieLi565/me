@@ -1,6 +1,6 @@
 ---
-title: Unbuffered vs Channels
-description:
+title: Unbuffered vs Buffered Channels
+description: The difference between unbuffered and buffered channels and how using an unbuffered channel can sometimes hurt the applications we build.
 publish: March 3, 2024
 ttr: 5
 tags: ["Go", "Channels", "Concurrency"]
@@ -22,6 +22,7 @@ From [the documentation](https://go.dev/doc/effective_go#channels) :
 
 In other words, I like to view unbuffered channels as:
 
+- Synchronous communication between routine(s)
 - A channel that is always full, causing the sender to wait for another goroutine to free up some room within the channel before sending.
 - An unbuffered channel is a channel that is always full. It must have a goroutine take whatever the sender sends.
 
@@ -82,6 +83,12 @@ A buffered channel introduces some room for the sender to send data.
 ch := make(chan string, CAPACITY) // e.g. 1, 2, or 3
 ```
 
+Again I like to view buffered channels as :
+
+- Asynchronous communication between routines
+- Allows the channel to store some data
+- Send operations are not blocked if there is no receiver on the other end (as long as the channel is not full)
+
 Allowing the previous program to execute with no issues.
 
 ```go
@@ -112,7 +119,7 @@ When approaching this problem from a coding perspective, my initial thought is t
 
 ```go
 func requests() string {
-  urls = []string{
+  urls := []string{
     "https://api.microservice1.com/",
     "https://api.microservice2.com/",
     "https://api.microservice3.com/",
