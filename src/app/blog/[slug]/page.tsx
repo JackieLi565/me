@@ -4,6 +4,8 @@ import HighlightedMarkdown from "@/components/Highlight";
 import { getMdContent, getMdMetaData } from "@/utils/files";
 import { default as CatError } from "@/components/Error";
 import { BlogTitle } from "@/components/Blog/BlogTitle";
+import { GitHubEdit } from "@/components/GithubEdit";
+import Loader from "@/components/Loader";
 
 type Props = {
   params: { slug: string };
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const Page: FC<Props> = ({ params }) => {
   return (
     <main>
-      <Suspense>
+      <Suspense fallback={<Loader />}>
         <Content params={params} />
       </Suspense>
     </main>
@@ -51,17 +53,18 @@ const Content: FC<Props> = async ({ params }) => {
     );
 
   return (
-    <article className="prose prose-pre:bg-[#282c34] prose-code:text-white prose-base prose-p:text-lg prose-headings:text-white prose-p:text-paragraph prose-strong:text-cyan-600 prose-a:text-cyan-600 prose-li:text-paragraph prose-table:text-paragraph prose-img:rounded-lg">
-      <div>
-        <BlogTitle
-          title={params.slug}
-          date={new Date(blogContent.data.publish)}
-          readTime={blogContent.data.ttr}
-        />
-        {blogContent && (
+    <>
+      <article className="prose prose-pre:bg-[#282c34] prose-code:text-white prose-base prose-p:text-lg prose-headings:text-white prose-p:text-paragraph prose-strong:text-cyan-600 prose-a:text-cyan-600 prose-li:text-paragraph prose-table:text-paragraph prose-img:rounded-lg">
+        <div>
+          <BlogTitle
+            title={blogContent.data.title}
+            date={new Date(blogContent.data.publish)}
+            readTime={blogContent.data.ttr}
+          />
           <HighlightedMarkdown>{blogContent.content}</HighlightedMarkdown>
-        )}
-      </div>
-    </article>
+        </div>
+      </article>
+      <GitHubEdit name={params.slug} />
+    </>
   );
 };

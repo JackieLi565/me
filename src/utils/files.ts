@@ -1,5 +1,4 @@
 import matter from "gray-matter";
-import { promisify } from "util";
 import { promises as fs } from "fs";
 import { BlogMeta } from "@/types";
 import path from "path";

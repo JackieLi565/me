@@ -38,7 +38,7 @@ Conversely, asynchronous processing involves tasks that don't require immediate 
 
 <img src="/md/message-queues/asynchronous.png"/>
 
-### Message Queues & The Benefits
+## Message Queues & The Benefits
 
 I still haven't explained what the hell is a message queue. I like to use analogies, but from my understanding I imagine a message queue as an organized mailbox. As a client you can drop off your mail or package into the mailbox, and a mailman comes over to pick them up for processing. Although, this is a very generalized description we can use this analogy for the components of a message queue:
 
